@@ -10,13 +10,12 @@ bind 'set completion-ignore-case on'        # Make completion case insensitive.
 # Inspired by: http://aijazansari.com/2010/02/20/navigating-the-directory-stack-in-bash/index.html
 
 stack_cd() {
-  if [ $1 ]; then
+  if [ $# -eq 1 ]; then
     pushd "$1" > /dev/null
   else
     pushd "$HOME" > /dev/null
   fi
 }
-
 
 alias cd=stack_cd  
 
@@ -46,3 +45,8 @@ display_stack() {
   fi
 }
 alias d=display_stack
+
+# Persistent saving of last pwd.
+[ -f "$HOME/.storepwd" ] && cd "$(<$HOME/.storepwd)"
+
+PROMPT_COMMAND+='; pwd > "$HOME/.storepwd"'
