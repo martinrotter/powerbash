@@ -13,7 +13,7 @@ stack_cd() {
   if [ $1 ]; then
     pushd "$1" > /dev/null
   else
-    pushd $HOME > /dev/null
+    pushd "$HOME" > /dev/null
   fi
 }
 
