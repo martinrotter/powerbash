@@ -49,4 +49,4 @@ alias d=display_stack
 # Persistent saving of last pwd.
 [ -f "$HOME/.storepwd" ] && cd "$(<$HOME/.storepwd)"
 
-PROMPT_COMMAND+='; pwd > "$HOME/.storepwd"'
+PROMPT_COMMAND+='pwd > "$HOME/.storepwd"'
