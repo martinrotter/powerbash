@@ -50,3 +50,6 @@ alias d=display_stack
 [ -f "$HOME/.storepwd" ] && cd "$(<$HOME/.storepwd)"
 
 PROMPT_COMMAND+='pwd > "$HOME/.storepwd"'
+
+# Unique history entries.
+export HISTCONTROL=ignoreboth:erasedups
