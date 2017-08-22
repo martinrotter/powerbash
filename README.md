@@ -1,12 +1,6 @@
 # powerbash
 Tiny &amp; simple pure Bash prompt (partly) inspired by powerline.
 
-### Terminix (Linux)
-![alt text](https://raw.githubusercontent.com/martinrotter/powerbash/master/screenshots/powerbash.png)
-
-### Mintty (Cygwin)
-![alt text](https://raw.githubusercontent.com/martinrotter/powerbash/master/screenshots/powerbash-mintty.png)
-
 ## What is this stuff?
 This is fast and tiny set of Bash scripts providing some nice Bash setup, including powerline-inspired prompt and some other enhancements. The prompt offers some nice visual experience and information, including Git repositories metadata.
 
