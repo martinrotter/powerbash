@@ -3,48 +3,64 @@
 ################################################
 
 # Specify colors.
-color_user_host="84"
-color_code_ok="7"
-color_code_wrong="10"
-color_pwd="75"
-color_git="202"
-color_result="254"
+color_text="30m"
+color_user_host="42m"
+color_code_wrong="41m"
+color_pwd="44m"
+color_git_ok="42m"
+color_git_dirty="41m"
 
 # Specify common variables.
-prompt_char='➥'
+prompt_char='$'
+rc='\e[0m'
 
 get-user-host() {
-  echo -n " ☻ \u@\h "
+  [[ -n "$SSH_CLIENT" ]] && echo -ne "\e[$1\e[$2 \u@\h $rc"
 }
 
 get-pwd() {
-  echo -n " 📂 \w "
+  echo -ne "\e[$1\e[$2 \w $rc"
 }
 
 get-git-info() {
-  git_branch=$(git symbolic-ref --short HEAD 2> /dev/null)
+  local git_branch=$(git symbolic-ref --short HEAD 2> /dev/null)
    
-  if [[ -n "$git_branch" ]]; then  
+  if [[ -n "$git_branch" ]]; then
     git diff --quiet --ignore-submodules --exit-code HEAD > /dev/null 2>&1
     
-    [[ "$?" != "0" ]] && git_symbols="❗ "
+    if [[ "$?" != "0" ]]; then
+      git_symbols="❗ "
+      back_color=$3
+    else
+      back_color=$2
+    fi
   
-    echo -n " $git_branch $git_symbols"
+    echo -n "\e[$1\e[$2 $git_branch $git_symbols$rc"
   fi
 }
 
-precmd() {
-  if [ ! -z "$last_code" ]; then
-    [[ $last_code -eq 0 ]] && echo -n " ✔ $last_code " || echo -n " ✘ $last_code "
-  fi
+get-last-code() {
+  [[ (-n "$last_code") && ($last_code -ne 0) ]] && echo -n "\e[$1\e[$2 ✘ $last_code $rc"
 }
 
-PROMPT_COMMAND+="last_code=\$?; "
+get-prompt() {
+  echo -n "\n" && echo -n " $prompt_char "
+}
 
-# Prompt.
-PS1="\[\e]0;\w\a\]\n"
-PS1+="\[\e[48;5;$color_user_host;38;5;0m\]$(get-user-host)"
-PS1+="\[\e[48;5;$color_result;38;5;0m\]\$(precmd)"
-PS1+="\[\e[48;5;$color_pwd;38;5;0m\]$(get-pwd)"
-PS1+="\[\e[48;5;$color_git;38;5;0m\]\$(get-git-info)"
-PS1+="\[\e[0m\]\n $prompt_char "
+set_prompt() {
+  last_code=$?
+
+  if [[ "$not_first_prompt" == true ]]; then
+    PS1="\n$(get-user-host $color_text $color_user_host)"
+  else
+    PS1="$(get-user-host $color_text $color_user_host)"
+    not_first_prompt=true
+  fi
+
+  PS1+="$(get-last-code $color_text $color_code_wrong)"
+  PS1+="$(get-pwd $color_text $color_pwd)"
+  PS1+="$(get-git-info $color_text $color_git_ok $color_git_dirty)"
+  PS1+="$(get-prompt)"
+}
+
+PROMPT_COMMAND="set_prompt;$PROMPT_COMMAND"

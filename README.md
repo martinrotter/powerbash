@@ -7,8 +7,7 @@ This is fast and tiny set of Bash scripts providing some nice Bash setup, includ
 You need these things to get powerbash running:
 
 * Bash,
-* terminal emulator,
-* Perl.
+* terminal emulator.
 
 ## What it shows?
 This is simple prompt which shows:

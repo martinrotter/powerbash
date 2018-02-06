@@ -5,7 +5,6 @@
 
 bind 'set completion-ignore-case on'        # Make completion case insensitive.
 
-
 # Enhanced directory stack access & cooperation with "cd".
 # Inspired by: http://aijazansari.com/2010/02/20/navigating-the-directory-stack-in-bash/index.html
 
