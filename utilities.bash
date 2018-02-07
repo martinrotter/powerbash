@@ -20,19 +20,19 @@ stack_cd() {
   fi
 }
 
-alias cd=stack_cd  
+alias cd=stack_cd
 
 swap() {
   pushd > /dev/null
 }
 
-alias s=swap  
+alias s=swap
 
 pop_stack() {
   popd > /dev/null
 }
 
-alias p=pop_stack  
+alias p=pop_stack
 
 display_stack() {
   dirs -v
