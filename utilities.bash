@@ -2,8 +2,12 @@
 ### This is the OPTIONAL Bash powerbash utlity script.
 #####################################################
 
-
+bind 'set show-all-if-ambiguous on'         # Show everything on ambiguous situation.
 bind 'set completion-ignore-case on'        # Make completion case insensitive.
+
+# History completion with arrow keys.
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
 
 # Enhanced directory stack access & cooperation with "cd".
 # Inspired by: http://aijazansari.com/2010/02/20/navigating-the-directory-stack-in-bash/index.html
