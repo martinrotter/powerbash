@@ -11,7 +11,7 @@ color_git_ok="42m"
 color_git_dirty="41m"
 
 # Specify common variables.
-prompt_char='$'
+prompt_char='λ'
 rc='\e[0m'
 
 get-user-host() {
