@@ -8,6 +8,10 @@ bind 'set completion-ignore-case on'        # Make completion case insensitive.
 # History completion with arrow keys.
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
+bind '"\C-_":backward-kill-word'
+bind '"\e[3;5~": kill-word'
+bind '"\e[1;5C": forward-word'
+bind '"\e[1;5D": backward-word'
 
 # Enhanced directory stack access & cooperation with "cd".
 # Inspired by: http://aijazansari.com/2010/02/20/navigating-the-directory-stack-in-bash/index.html
