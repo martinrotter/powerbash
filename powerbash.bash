@@ -63,4 +63,4 @@ set_prompt() {
   PS1+="$(get-prompt)"
 }
 
-PROMPT_COMMAND="set_prompt;$PROMPT_COMMAND"
+PROMPT_COMMAND="set_prompt"
