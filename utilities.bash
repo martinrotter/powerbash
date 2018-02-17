@@ -9,6 +9,7 @@ bind 'set completion-ignore-case on'        # Make completion case insensitive.
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 bind '"\C-_":backward-kill-word'
+bind '"\C-h":backward-kill-word'
 bind '"\e[3;5~": kill-word'
 bind '"\e[1;5C": forward-word'
 bind '"\e[1;5D": backward-word'
@@ -18,10 +19,12 @@ bind '"\e[1;5D": backward-word'
 
 stack_cd() {
   if [ $# -eq 1 ]; then
-    pushd "$1" > /dev/null
+    ARG="$1"
   else
-    pushd "$HOME" > /dev/null
+    ARG="$HOME"
   fi
+  
+  pushd "$ARG" > /dev/null
 }
 
 alias cd=stack_cd
@@ -44,10 +47,10 @@ display_stack() {
   read dir
   
   if [[ "$dir" = 'p' ]]; then
-    pushd > /dev/null
+    swap
   elif [[ "$dir" != 'q' ]]; then
     d=$(dirs -l +$dir);
-    popd +$dir > /dev/null
+    popd -n +$dir > /dev/null
     pushd "$d" > /dev/null
   fi
 }
